@@ -1,0 +1,263 @@
+#include<stdio.h>
+#include<stdlib.h>
+void insert();
+void add();
+void deletesp();
+void display();
+void deleteall();
+void length();
+void reverse();
+void addatbegin();
+// void swap();
+struct node
+{
+    int data;
+    struct node*llink;
+    struct node*rlink;
+};
+struct node*root=NULL;
+int len,c;
+int main()
+{
+    int n;
+    while(1)
+    {
+    printf("Enter your choice:-\n");
+    printf("1.Insert node.\n");
+    printf("2.Delete a node.\n");
+    printf("3.Add at specific location.\n");
+    printf("4.Delete the linked list.\n");
+    printf("5.Display.\n");
+    printf("6.Length.\n");
+    printf("7.Reverse.\n");
+    printf("8.Add at begining.\n");
+    printf("9.Swap.\n");
+    printf("10.Quit.\n");
+    scanf("%d",&n);
+    switch(n)
+    {
+        case 1:insert();
+        break;
+        case 2:deletesp();
+        break;
+        case 3:add();
+        break;
+        case 4:deleteall();
+        break;
+        case 5:display();
+        break;
+        case 6:length();
+        len=c;
+        printf("Length is:-%d\n",len);
+        break;
+        case 7:reverse();
+        break;
+        case 8:addatbegin();
+        break;
+        // case 9:swap();
+        // break;
+        case 10:exit(0);
+        default:
+        printf("Wrong choice bro!!!!\n");
+        
+    }
+
+
+}
+}
+void insert()
+{
+    struct node*temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data:-\n");
+    scanf("%d",&temp->data);
+    temp->llink=NULL;
+    temp->rlink=NULL;
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else{
+        struct node*p;
+        p=root;
+    while(p->rlink!=NULL)
+    {
+        p=p->rlink;
+    }
+    p->rlink=temp;
+    temp->llink=p;
+}
+}
+void display()
+{
+    struct node*p;
+    p=root;
+    if(root==NULL)
+    {
+        printf("Empty.\n");
+
+    }
+    else{
+    while(p!=NULL)
+    {
+        printf("%d ",p->data);
+        p=p->rlink;
+    }
+    printf("\n");
+}
+}
+void length()
+{ struct node*p;
+    p=root;c=0;
+    while(p!=NULL)
+    {++c;
+        p=p->rlink;
+    }
+    
+
+}
+void deletesp()
+{struct node *temp;
+    int n;
+    printf("Enter the location:-");
+    scanf("%d",&n);
+    if(n>len)
+    {
+        printf("Invalid location.\n");
+    }
+
+        else if(n==1)
+{
+    temp=root;
+    root=temp->rlink;
+    temp->rlink=NULL;
+    free(temp);
+}
+else{
+    int i=1;struct node*p=root;
+    struct node*q;
+    while(i<n-1)
+    {
+        p=p->rlink;
+        i++;
+    }
+    q=p->rlink;
+    p->rlink=q->rlink;
+    q->rlink->llink=p;
+    q->rlink=NULL;
+    q->llink=NULL;
+    free(q);
+}
+}
+void add()
+{
+    int n;int i=1;
+    struct node*temp;
+    struct node*p;
+    temp=(struct node*)malloc(sizeof(struct node));
+     printf("Enter the location:-");
+    scanf("%d",&n);
+    scanf("%d",&temp->data);
+    temp->llink=NULL;
+    temp->rlink=NULL;
+   if(n>len)
+    {
+     printf("Invalid location.\n");
+    }
+    else{
+            p=root;
+        while(i<n-1)
+        {
+            p=p->rlink;i++;
+        }
+    
+    temp->rlink=p->rlink;
+    p->rlink=temp;
+    p->rlink->llink=temp;
+    temp->llink=p;
+
+    }
+}
+    void deleteall()
+    {
+        
+          struct node*p=root;
+          {
+              while(root!=NULL)
+              {
+                  p=root;
+                  root=root->rlink;
+                  free(p);
+              }
+          }
+        
+    }
+    void reverse()
+    {struct node*p=root;
+        while(p->rlink!=NULL)
+        {
+            p=p->rlink;
+        }
+        while(p!=NULL)
+        {
+           printf("%d ",p->data);
+           p=p->llink;
+        }printf("\n");
+    }
+    void addatbegin()
+    {struct node*temp;
+    temp=(struct node*)malloc(sizeof(struct node));
+    printf("Enter the data:-\n");
+    scanf("%d",&temp->data);
+    temp->llink=NULL;
+    temp->rlink=NULL;
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else{
+        temp->rlink=root;
+        root->llink=temp;
+        root=temp;
+    }
+        
+    }
+    // void swap()
+    // {struct node*s=root;
+    //     int x;int y;
+    //     printf("Enter the 1st node:-\n");
+    //     scanf("%d",&x);
+    //     printf("Enter the 2nd node:-\n");
+    //     scanf("%d",&y);
+    //     if(x>len || y>len)
+    //     {
+    //         printf("Invalid location.\n");
+    //     }
+    //     else{int i=1;int j=1;
+    //         struct node*p=root;
+    //          struct node*q=root;
+    //          struct node*r=root;
+             
+    //          while(i<=x-1)
+    //          {
+    //             p=p->rlink;
+    //             r=r->rlink;
+    //             i++;
+    //          }
+    //          while(j<=y-1)
+    //          {
+    //              q=q->rlink;
+    //              j++;
+    //          }
+    //          p->rlink=q->rlink;
+    //          q->rlink->llink=p;
+    //          p->llink=q->llink;
+    //          q->llink->rlink=p;
+    //          q->rlink=r->rlink;
+    //          q->llink=r->llink;
+    //          r->rlink->llink=q;
+    //          r->llink->rlink=q;
+    //           display();
+    //     }
+       
+    // }
