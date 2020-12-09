@@ -1,0 +1,91 @@
+#include<stdio.h>
+#include<stdlib.h>
+#define N 5
+int c=0;
+struct node
+{
+    int data;
+    struct node*link;
+};
+struct node*root=NULL;
+void push();
+void pop();
+void display();
+int main()
+{
+    int n;
+    while(1)
+    {
+    printf("Enter your choice:-\n");
+    printf("1.Push Element.\n");
+    printf("2.Pop Element.\n");
+    printf("3.Display.\n");
+    printf("4.Quit.\n");
+    scanf("%d",&n);
+    switch(n)
+    {
+        case  1:push();
+        break;
+        case 2:pop();
+        break;
+        case 3:display();
+        break;
+        case 4:exit(0);
+        break;
+        default:
+        printf("Wrong Choice!!!\n");
+
+    }
+    }
+}
+    void push()
+    {++c;
+    if(c<=N){
+        struct node*temp;
+    temp=(struct node*)malloc(sizeof(struct node));  
+    printf("Enter the Element:-\n");
+    scanf("%d",&temp->data);
+    temp->link=NULL;
+    if(root==NULL)
+    {
+        root=temp;
+    }
+    else{
+        temp->link=root;
+        root=temp;
+    }
+
+    }
+    else{
+        printf("Stack Overflow\n");
+    }
+    }
+    void display()
+    {
+        if(root==NULL)
+        {
+            printf("Empty.\n");
+        }
+        else{
+            struct node *p=root;
+            while(p!=NULL)
+            {
+                printf("%d\n",p->data);
+                p=p->link;
+            }
+        }
+    }
+    void pop()
+    {--c;
+        if(c>0)
+        {
+          struct node*temp=root;
+           temp=root;
+    root=temp->link;
+    temp->link=NULL;
+    free(temp);
+        }
+        else{
+            printf("Empty!\n");
+        }
+    }
