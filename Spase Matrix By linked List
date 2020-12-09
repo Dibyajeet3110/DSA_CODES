@@ -1,0 +1,84 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node
+{
+    int row;
+    int column;
+    int data;
+    struct node*link;
+};
+struct node*head=NULL;
+int count=0;
+
+
+void add_node()
+{
+    int r,c,i,j;
+    printf("Enter the dimensions of the matrix : \n");
+    scanf("%d%d",&r,&c);
+    int mat[r][c];
+    printf("Enter the elements of the matrix : \n");
+
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            scanf("%d",&mat[i][j]);
+            if(mat[i][j]!=0)
+               { count++;
+               }
+        }
+    }
+    for(i=0;i<r;i++)
+    {
+        for(j=0;j<c;j++)
+        {
+            if(mat[i][j]!=0)
+            {struct node*temp;
+            temp=(struct node*)malloc(sizeof(struct node));
+                temp->column=j;
+                temp->row=i;
+                    temp->data=mat[i][j];
+                   temp->link=NULL;
+                if(head==NULL)
+                {
+                head=temp;
+                    
+                }
+                else
+                {struct node*p;
+                p=head;
+                    while(p->link!=NULL)
+                    {
+                        p=p->link;
+                    }p->link=temp;
+                }
+            }
+        }
+    }
+
+}
+void display()
+{
+    int i;
+    struct node*current=head;
+    if(head==NULL)
+    {
+        printf("Linked List is empty .\n");
+    }
+    else
+    {
+        for(i=0;i<count+1;i++)
+        {
+            printf("%d\t%d\t%d\n",current->row,current->column,current->data);
+            current=current->link;
+
+        }
+    }
+}
+int main()
+{
+    add_node();
+    display();
+    return 0;
+}
